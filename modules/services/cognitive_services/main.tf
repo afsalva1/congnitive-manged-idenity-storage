@@ -1,5 +1,5 @@
 resource "azurerm_cognitive_account" "main" {
-  name                  = "afsaL-cogntive-cogsvc-test-qwertyuiop"
+  name                  = "afsaL-cogntive-cogsvc-test-qwertyuiopone"
   location              = var.location
   resource_group_name   = var.resource_group_name
   kind                  = var.kind
