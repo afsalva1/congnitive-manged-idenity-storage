@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "storage_RG" {
-  name     = "Afsal-storage-RG-ToolTool"
+  name     = "Afsal-storage-RG-FiveOrFive"
   location = "eastus"
 }
 
 resource "azurerm_storage_account" "afsal_stg_account" {
-  name                     = "afsalstorageaccountone"
+  name                     = "afsalstorageaccountfivetoone"
   resource_group_name      = azurerm_resource_group.storage_RG.name
   location                 = azurerm_resource_group.storage_RG.location
   account_tier             = "Standard"
@@ -72,7 +72,7 @@ module "cognitive_service" {
   location                   = azurerm_resource_group.storage_RG.location
   prefix                     = local.prefix
   kind                       = "FormRecognizer"
-  custom_subdomain           = "afsalcogntivecogsvctesqwertyuiopone"
+  custom_subdomain           = "afsalcogntivecogsvctesfiveorfive"
   allowed_fqdns              = [azurerm_storage_account.afsal_stg_account.primary_blob_host]
   private_endpoint_subnet_id = "/subscriptions/e060f39e-3e99-4511-9b8a-54a14dd431da/resourceGroups/Afsal-VirtualNetwork/providers/Microsoft.Network/virtualNetworks/afsal-virtualnetwork/subnets/afsal-vnet"
 #   private_link_dns_zones     = data.terraform_remote_state.main.outputs.private_link_dns_zone_ids
