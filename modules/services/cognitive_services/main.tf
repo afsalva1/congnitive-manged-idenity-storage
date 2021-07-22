@@ -40,11 +40,17 @@ resource "azurerm_private_endpoint" "cogsvc" {
 // Until these are added, we can set them via script after the Cognitive Services account
 // has been created.
   
-
 resource "null_resource" "example1" {
   provisioner "local-exec" {
-    command = "chmod 777 ${path.module}/scripts"
+    command = "chmod 777 ${path.module}/scripts/get_cognitive_account_identity.sh"
+  }  
+}
+
+resource "null_resource" "example2" {
+  provisioner "local-exec" {
+    command = "chmod 777 ${path.module}/scripts/lockdown_cognitive_account.sh"
   }
+  depends_on     = [null_resource.example1]
 }
 
 resource "null_resource" "cogsvc_lockdown" {
@@ -53,7 +59,8 @@ resource "null_resource" "cogsvc_lockdown" {
     resource_group = azurerm_cognitive_account.main.resource_group_name
     version        = 1
   }
-  depends_on     = [null_resource.example1]
+  
+  depends_on     = [null_resource.example2]
 
   provisioner "local-exec" {
     command     = "${path.module}/scripts/lockdown_cognitive_account.sh"
